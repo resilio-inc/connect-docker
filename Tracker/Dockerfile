@@ -13,5 +13,5 @@ RUN tar xf tracker.tar.gz && \
 RUN chown -R resilio:resilio /home/resilio
 
 USER resilio
-ENTRYPOINT ["exec", "./tracker"]
+ENTRYPOINT ["./tracker"]
 CMD ["-p", "3000"]
