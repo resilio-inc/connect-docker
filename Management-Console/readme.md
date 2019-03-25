@@ -16,6 +16,7 @@ sudo usermod -aG docker <your_user_name>
 docker build -t resilio_connect_mc .
 
 mkdir mc_data
+sudo chown -R 1000:1000 mc_data
 
 # run docker in deattached mode
 docker run -d -v $(pwd)/mc_data:/home/resilio/resilio-connect-server/var \
@@ -44,6 +45,7 @@ sudo usermod -aG docker <your_user_name>
 docker build -t resilio_connect_mc .
 
 mkdir mc_data
+sudo chown -R 1000:1000 mc_data
 ```
 
 Create docker-compose.yml file with the following content
