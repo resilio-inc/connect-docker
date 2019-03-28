@@ -1,14 +1,22 @@
 FROM ubuntu:18.04
 
-ARG URL=https://download-cdn.resilio.com/resilio-connect-builds-2.6/server/2.6.2/resilio-connect-console-linux-x64.tar.gz
+ARG USER=resilio
 
-RUN useradd -Um resilio
-WORKDIR /home/resilio
+RUN useradd -Um $USER
+WORKDIR /home/$USER
 
-ADD ${URL} mc.tar.gz
+ADD https://download-cdn.resilio.com/resilio-connect-builds-2.6/server/2.6.2/resilio-connect-console-linux-x64.tar.gz mc.tar.gz
 RUN tar xf mc.tar.gz && rm mc.tar.gz
-RUN chown -R resilio:resilio /home/resilio
+RUN chown -R $USER:$USER /home/$USER
 
-USER resilio
-WORKDIR /home/resilio/resilio-connect-server
-ENTRYPOINT exec ./srvctrl run
+ARG DIST_PATH=/home/$USER/resilio-connect-server
+
+USER $USER
+WORKDIR $DIST_PATH
+
+ENV DIST_PATH $DIST_PATH
+ENV SERVER_DIST_PATH $DIST_PATH/server
+ENV PATH $DIST_PATH/nodejs/bin:$PATH
+ENV NODE_ENV production
+
+ENTRYPOINT exec node --max_old_space_size=3072 "$SERVER_DIST_PATH/server.js" run
