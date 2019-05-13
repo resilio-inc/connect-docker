@@ -19,6 +19,7 @@ mkdir mc_data
 sudo chown -R 1000:1000 mc_data
 
 docker run -d -v $(pwd)/mc_data:/home/resilio/resilio-connect-server/var \
+           -v /etc/localtime:/etc/localtime:ro \
            -p 8443:8443/tcp \
            -p 8444:8444/tcp \
            -p 8445:8445/tcp \
