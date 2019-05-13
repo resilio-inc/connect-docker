@@ -43,9 +43,12 @@ where `-t <grace_period_in_sec>` - seconds to wait for stop before killing it (s
 #### Via docker-compose:
 
 ```
-sudo apt install docker.io docker-compose
+sudo apt install docker.io
 sudo usermod -aG docker <your_user_name>
 # logout and login
+
+# install docker-compose 3 according to this guide:
+https://docs.docker.com/compose/install/
 
 mkdir mc_data
 sudo chown -R 1000:1000 mc_data
