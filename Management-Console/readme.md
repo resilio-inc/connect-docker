@@ -77,22 +77,22 @@ services:
     restart: always  # optional
 ```
 
-# run docker-compose in deattached mode
+#### to run docker-compose in deattached mode
 ```
 docker-compose up -d
 ```
 
-# or run in interactive mode
+#### or run in interactive mode
 ```
 docker-compose up
 ```
 
-# to stop container(s)
+#### to stop container(s)
 ```
 docker-compose stop
 ```
 
-# to stop and remove container and related resources
+#### to stop and remove container and related resources
 ```
 docker-compose down
 ```
