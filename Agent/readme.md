@@ -24,6 +24,7 @@ docker run -d -p 3839:3839/tcp \
               -v $(pwd)/sync.conf:/home/resilio/sync.conf \
               -v $(pwd)/shared:/home/resilio/shared \
               -v $(pwd)/storage:/home/resilio/.sync \
+              -v /etc/localtime:/etc/localtime:ro \
               --restart always \
               resilio_connect_agent
 ```
