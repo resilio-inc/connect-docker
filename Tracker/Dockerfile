@@ -1,17 +1,28 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
-ARG URL=https://download-cdn.resilio.com/resilio-connect-builds-2.6/tracker/2.6/tracker.tar.gz
+LABEL maintainer="support@resilio.com" \
+      vendor="Resilio, Inc." \
+      version="3.0.454"
 
-RUN useradd -Um resilio
-WORKDIR /home/resilio
+ARG USER=resilio
+ARG GROUP=resilio
+ARG USERID=555
+ARG GROUPID=555
+ARG HOMEDIR=/home/${USER}
+ARG URL=https://download-cdn.resilio.com/resilio-connect-builds-2.10/tracker/3.0/tracker.tar.gz
+
+RUN groupadd -g ${GROUPID} ${GROUP} && \
+    useradd -m -u ${USERID} -g ${GROUPID} ${USER}
+
+WORKDIR ${HOMEDIR}
 
 ADD ${URL} tracker.tar.gz
 RUN tar xf tracker.tar.gz && \
     rm tracker.tar.gz && \
     mv resilio_tracker/tracker . && \
-    rm -rf resilio_tracker
-RUN chown -R resilio:resilio /home/resilio
+    rm -rf resilio_tracker && \
+    chown -R ${USERID}:${GROUPID} ${HOMEDIR}
 
-USER resilio
+USER ${USER}
 ENTRYPOINT ["./tracker"]
 CMD ["-p", "3000"]
