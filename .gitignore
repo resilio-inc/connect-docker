@@ -1,1 +1,5 @@
 .idea
+/Agent/sync.conf
+/Agent/storage/
+/Agent/shared/
+/Management-Console/mc_data/
